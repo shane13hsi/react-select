@@ -42,7 +42,7 @@ var Value = React.createClass({
 
         return (
             <div className="Select-item">
-				c<span className="Select-item-icon"
+				<span className="Select-item-icon"
                       onMouseDown={this.blockEvent}
                       onClick={this.handleOnRemove}
                       onTouchEnd={this.handleOnRemove}>&times;</span>
