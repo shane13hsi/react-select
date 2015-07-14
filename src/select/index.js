@@ -1,1 +1,2 @@
-exports.Select = require('./Select');
+import Select from './Select';
+export default Select;
