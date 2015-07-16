@@ -29,6 +29,7 @@ var Select = React.createClass({
         inputProps: React.PropTypes.object,        // custom attributes for the Input (in the Select-control) e.g: {'data-foo': 'bar'}
         matchPos: React.PropTypes.string,          // (any|start) match the start or entire string when filtering
         matchProp: React.PropTypes.string,         // (any|label|value) which option property to filter on
+        menuInitialClose: React.PropTypes.bool,    // close menu on initial
         multi: React.PropTypes.bool,               // multi-value input
         name: React.PropTypes.string,              // field name, for hidden <input /> tag
         addLabelText: React.PropTypes.string,      // placeholder displayed when you want to add a label on a multi-value input
@@ -661,6 +662,13 @@ var Select = React.createClass({
                 label: inputValue,
                 create: true
             });
+        }
+
+        if (this.props.menuInitialClose && !this.state.inputValue) {
+            return (
+                <div className="Select-noresults">
+                    {this.props.placeholder}
+                </div>);
         }
 
         var ops = Object.keys(this.state.filteredOptions).map(function(key) {
