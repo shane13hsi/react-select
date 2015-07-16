@@ -40,12 +40,19 @@ var Value = React.createClass({
             );
         }
 
-        return (
-            <div className="Select-item">
-				<span className="Select-item-icon"
+        var icon;
+        if (!this.props.disabled) {
+            icon = (
+                <span className="Select-item-icon"
                       onMouseDown={this.blockEvent}
                       onClick={this.handleOnRemove}
                       onTouchEnd={this.handleOnRemove}>&times;</span>
+            );
+        }
+
+        return (
+            <div className="Select-item">
+                {icon}
                 <span className="Select-item-label">{label}</span>
             </div>
         );
