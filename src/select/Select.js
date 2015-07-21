@@ -220,7 +220,7 @@ var Select = React.createClass({
             values: values,
             inputValue: '',
             filteredOptions: filteredOptions,
-            placeholder: !this.props.multi && values.length ? values[0].label : this.props.placeholder,
+            placeholder: !this.props.multi && values.length ? values[0].text : this.props.placeholder,
             focusedOption: !this.props.multi && values.length ? values[0] : filteredOptions[0]
         };
     },
@@ -241,7 +241,7 @@ var Select = React.createClass({
                         return options[key];
                     }
                 }
-                return {value: val, label: val};
+                return {value: val, text: val};
             } else {
                 return val;
             }
@@ -553,17 +553,17 @@ var Select = React.createClass({
             var filterOption = function(op) {
                 if (this.props.multi && exclude.indexOf(op.value) > -1) return false;
                 if (this.props.filterOption) return this.props.filterOption.call(this, op, filterValue);
-                var valueTest = String(op.value), labelTest = String(op.label);
+                var valueTest = String(op.value), labelTest = String(op.text);
                 if (this.props.ignoreCase) {
                     valueTest = valueTest.toLowerCase();
                     labelTest = labelTest.toLowerCase();
                     filterValue = filterValue.toLowerCase();
                 }
                 return !filterValue || (this.props.matchPos === 'start') ? (
-                (this.props.matchProp !== 'label' && valueTest.substr(0, filterValue.length) === filterValue) ||
+                (this.props.matchProp !== 'text' && valueTest.substr(0, filterValue.length) === filterValue) ||
                 (this.props.matchProp !== 'value' && labelTest.substr(0, filterValue.length) === filterValue)
                 ) : (
-                (this.props.matchProp !== 'label' && valueTest.indexOf(filterValue) >= 0) ||
+                (this.props.matchProp !== 'text' && valueTest.indexOf(filterValue) >= 0) ||
                 (this.props.matchProp !== 'value' && labelTest.indexOf(filterValue) >= 0)
                 );
             };
@@ -648,7 +648,7 @@ var Select = React.createClass({
     buildMenu: function() {
         var focusedValue = this.state.focusedOption ? this.state.focusedOption.value : null;
         var renderLabel = this.props.optionRenderer || function(op) {
-                return op.label;
+                return op.text;
             };
 
         if (this.state.filteredOptions.length > 0) {
@@ -659,7 +659,7 @@ var Select = React.createClass({
             var inputValue = this.state.inputValue;
             this.state.filteredOptions.unshift({
                 value: inputValue,
-                label: inputValue,
+                text: inputValue,
                 create: true
             });
         }
@@ -695,7 +695,7 @@ var Select = React.createClass({
             ) : (
                 <div ref={ref} key={'option-' + op.value} className={optionClass} onMouseEnter={mouseEnter}
                      onMouseLeave={mouseLeave} onMouseDown={mouseDown}
-                     onClick={mouseDown}>{ op.create ? this.props.addLabelText.replace('{label}', op.label) : renderedLabel}</div>
+                     onClick={mouseDown}>{ op.create ? this.props.addLabelText.replace('{text}', op.text) : renderedLabel}</div>
             );
         }, this);
 

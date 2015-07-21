@@ -24,18 +24,18 @@ var Value = React.createClass({
     },
 
     render: function() {
-        var label = this.props.option.label;
+        var text = this.props.option.text;
         if (this.props.renderer) {
-            label = this.props.renderer(this.props.option);
+            text = this.props.renderer(this.props.option);
         }
 
         if (this.props.optionLabelClick) {
-            label = (
+            text = (
                 <a className="Select-item-label__a"
                    onMouseDown={this.blockEvent}
                    onTouchEnd={this.props.onOptionLabelClick}
                    onClick={this.props.onOptionLabelClick}>
-                    {label}
+                    {text}
                 </a>
             );
         }
@@ -53,7 +53,7 @@ var Value = React.createClass({
         return (
             <div className="Select-item">
                 {icon}
-                <span className="Select-item-label">{label}</span>
+                <span className="Select-item-label">{text}</span>
             </div>
         );
     }
