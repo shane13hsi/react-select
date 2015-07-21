@@ -540,7 +540,7 @@ var Select = React.createClass({
 
     filterOptions: function(options, values) {
         if (!this.props.searchable) {
-            return options;
+            return options || [];
         }
 
         var filterValue = this._optionsFilterString;
